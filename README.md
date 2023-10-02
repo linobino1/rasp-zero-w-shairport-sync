@@ -1,6 +1,12 @@
 # rasp-zero-w-shairport-sync
 Setup shairport-sync on a Raspberry Zero W
 
+## Requirements
+
+- Raspberry Pi Zero W
+- HiFiBerry DAC+ Zero sound card
+- SD card
+
 ## Prepare OS
 
 1. Plug the SD card into your computer
@@ -13,7 +19,7 @@ Setup shairport-sync on a Raspberry Zero W
 1. CHeck "Configure Wireless LAN" and enter your WiFi credentials
 1. Click on "Write" and wait for the process to finish
 
-## Install Software
+## Install Docker and shairport-sync
 
 1. Plug the SD card into your Raspberry Pi
 1. Wait until the Raspberry Pi is up and running and connected to your WiFi
@@ -48,4 +54,19 @@ Setup shairport-sync on a Raspberry Zero W
 1. Build the docker image
     ```bash
     docker compose up
+    ```
+
+## Install HiFiBerry DAC+ Zero
+
+1. Uncomment the following line in the file `/boot/config.txt`
+    ```
+    dtparam=audio=on
+    ```
+1. Add the following line to the file `/boot/config.txt`
+    ```
+    dtoverlay=hifiberry-dac
+    ```
+1. Reboot the Raspberry Pi
+    ```bash
+    sudo reboot
     ```
