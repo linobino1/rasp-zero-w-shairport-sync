@@ -32,8 +32,6 @@ Setup shairport-sync on a Raspberry Zero W
     sudo apt update
     sudo apt upgrade
     ```
-1. Install shairport-sync
-    ```bash
 1. Install docker
     ```bash
     curl -fsSL https://get.docker.com -o get-docker.sh
