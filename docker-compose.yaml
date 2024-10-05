@@ -1,6 +1,6 @@
 services:
   shairport-sync:
-    image: mikebrady/shairport-sync:latest
+    image: mikebrady/shairport-sync:4.3.4
     network_mode: host
     restart: unless-stopped
     # environment:
