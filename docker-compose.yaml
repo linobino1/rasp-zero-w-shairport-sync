@@ -1,17 +1,24 @@
 services:
   shairport-sync:
-    image: mikebrady/shairport-sync:4.3.4
+    image: mikebrady/shairport-sync:5.0.4
     network_mode: host
     restart: unless-stopped
-    # environment:
+    cap_add:
+      - SYS_NICE
+    environment:
+      ENABLE_AVAHI: 0 # Use the host's Avahi and D-Bus services
     #  PULSE_SERVER: unix:/tmp/pulseaudio.socket # Path for PulseAudio socket
     #  PULSE_COOKIE: /tmp/pulseaudio.cookie # Path for PulseAudio cookie
     devices:
       - "/dev/snd" # ALSA device
     volumes:
-      - ./shairport-sync.conf:/etc/shairport-sync.conf
+      # - ./shairport-sync.conf:/etc/shairport-sync.conf
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket
+      # The image waits for this PID file even when its Avahi service is disabled.
+      - /run/avahi-daemon:/run/avahi-daemon:ro
+      - /etc/machine-id:/etc/machine-id:ro
     #   - /run/user/1000/pulse/native:/tmp/pulseaudio.socket # PulseAudio socket when using that backend
     logging:
       options:
-        max-size: "200k"
+        max-size: "20k"
         max-file: "10"

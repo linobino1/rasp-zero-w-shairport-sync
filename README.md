@@ -54,6 +54,20 @@ Setup shairport-sync on a Raspberry Zero W
     docker compose up
     ```
 
+The Compose configuration uses the host's Avahi daemon. Ensure it is enabled:
+
+```bash
+sudo systemctl enable --now avahi-daemon
+docker compose up -d --force-recreate
+```
+
+The first `Warning: avahi is not running` message can be expected while Avahi
+is starting. If it repeats continuously, check the container logs:
+
+```bash
+docker compose logs shairport-sync
+```
+
 ## Install HiFiBerry DAC+ Zero
 
 1. Uncomment the following line in the file `/boot/config.txt`
